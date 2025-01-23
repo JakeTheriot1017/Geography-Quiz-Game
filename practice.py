@@ -3,13 +3,11 @@ import random as ran
 import tkinter as tk
 from tkinter import messagebox
 
-# Create a root window (it can stay hidden)
+
 root = tk.Tk()
 root.withdraw()
 
-  # Hide the root window
-
-# Display a message box
+#function for writing the letters
 def write_letter(x,y,color,letter):
     t.penup()
     t.goto(x,y)
@@ -17,12 +15,12 @@ def write_letter(x,y,color,letter):
     t.write(' '.join(letter), font = ('Arial', 80, 'normal'))
 
 
-# Set up the screen
+# Screen setup
 sc = trtl.Screen()
 sc_height = 800
 sc_width = 600
 sc.setup(width=sc_width, height=sc_height)
-# Set up list and guess count
+# List setup that will be shown on the screen
 puzzle = [["_", "_", "_", "_", "_"],["_", "_", "_", "_", "_"],["_", "_", "_", "_", "_"],["_", "_", "_", "_", "_"],["_", "_", "_", "_", "_"],["_", "_", "_", "_", "_"]]
 currentGuessCount = 0
 canvas = trtl.getcanvas()
@@ -46,7 +44,7 @@ spacing = 90
 # Set up the turtle
 t = trtl.Turtle()
 t.penup()
-# t.hideturtle()
+t.hideturtle()
 t.speed(0)
 
 # The word to guess
@@ -67,7 +65,7 @@ for i in range(6):
 
 
 
-# Get the user's guess
+# Get the user's guess and runs game
 y = 300
 x = -200
 while currentGuessCount <= 5:
@@ -78,24 +76,20 @@ while currentGuessCount <= 5:
             raise ValueError
         elif guess not in words:
             raise ValueError
-        # if guess == wordle_word:
-        #         write_letter(x,y,"green",letters)
-        #         break
-            
         else:
             for i in range(len(letters)):
-                if letters[i] in ['m','w']:
+                if letters[i] in ['m','w']: 
                     x -= 15
                 if letters[i] == word_letters[i]:
-                    write_letter(x,y,'green',letters[i])  # Correct letter in correct position
+                    write_letter(x,y,'green',letters[i])  
                 elif letters[i] in word_letters and puzzle[currentGuessCount].count(letters[i]) < word_letters.count(letters[i]):                    
-                    write_letter(x,y,'yellow',letters[i])  # Correct letter but wrong position
+                    write_letter(x,y,'yellow',letters[i])  
                 else:
                     write_letter(x,y,'black',letters[i])
                 puzzle[currentGuessCount][i] = guess[i]
                 if letters[i] in ['m','w']:
                     x += 15
-                x += spacing   # Incorrect letter
+                x += spacing   
                 print(puzzle[currentGuessCount].count(letters[i]))
                 print(puzzle)
             if puzzle[currentGuessCount] == word_letters:
@@ -107,13 +101,6 @@ while currentGuessCount <= 5:
             
     except ValueError as e:
         messagebox.showinfo("Information", 'Must be a word from the dictionary that is 5 letters long!')
-
-# Set up the spacing between letters
-# Loop through each letter in the guess and print it with the correct color
-
-
-    # Move to the next position and write the letter
-  # Move x to the right for the next letter
 
 
 # Keeps the window open until you click on it
